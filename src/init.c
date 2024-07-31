@@ -6,11 +6,12 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:20:09 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 14:12:33 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:51:47 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 /*
  * If MALLOC goes bad (improbable)

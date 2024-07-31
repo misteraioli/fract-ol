@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:17:55 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 14:12:29 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:53:36 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	key_handler(int keysym, t_fractal *fractal)
 */
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
+	(void)x;
+	(void)y;
 	//Zoom in
 	if (button == Button5)
 	{

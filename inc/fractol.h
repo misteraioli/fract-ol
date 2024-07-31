@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:08:23 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 14:12:24 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 15:25:37 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include "../libft/inc/get_next_line.h"
 # include "../libft/inc/ft_printf.h"
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "../mlx_linux/mlx.h"
+
+#define ERROR_MESSAGE "Please enter \n\t\"./fractol mandelbrot\" or \n\t\"./fractol julia <value_1> <value_2>\"\n"
 
 #define WIDTH	800
 #define	HEIGHT	800
@@ -30,8 +34,8 @@
 
 typedef struct	s_complex
 {
-	double	re;
-	double	im;
+	double	x;
+	double	y;
 }				t_complex;
 
 typedef struct	s_img
@@ -67,8 +71,8 @@ typedef struct	s_fractal
  * They are basically IOUs to the compiler
 */
 //*** strings utils ***
-int		ft_strncmp(char *s1, char *s2, int n);
-void    putstr_fd(char *s, int fd);
+//int		ft_strncmp(char *s1, char *s2, int n);
+//void    putstr_fd(char *s, int fd);
 double  atodbl(char *s);
 
 //*** init ***

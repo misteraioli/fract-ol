@@ -32,13 +32,16 @@ OBJS	=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 #######################################################
 ## RULES
 
-all : $(NAME)
+all : make_lib $(NAME)
+
+make_lib :
+		make -C $(LIB_PATH)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) $(HEADER) $(LIB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(HEADER) -Imlx_linux -c $< -o $@
+		$(CC) $(CFLAGS) $(HEADER) -Imlx_linux -O3 -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
