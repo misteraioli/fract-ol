@@ -5,7 +5,7 @@ NAME		=	fractol
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-HEADER		=	-I/usr/include
+HEADER		=	-Iinc
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
