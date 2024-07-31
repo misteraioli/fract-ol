@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:14:07 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 15:26:07 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:20:26 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
  * 		~there are comments everywhere for clarity
  * 		~i go always on the next line to better see the function inputs
  * 		tldr->Don't git clone and push.
-
 */
 
 #include "fractol.h"
@@ -43,7 +42,6 @@ int	main(int ac, char **av)
 {
 	t_fractal	fractal;
 
-
 	if ((2 == ac && !ft_strncmp(av[1], "mandelbrot", 10))
 		|| (4 == ac && !ft_strncmp(av[1], "julia", 5)))
 	{
@@ -53,13 +51,8 @@ int	main(int ac, char **av)
 			fractal.julia_x = atodbl(av[2]);
 			fractal.julia_y = atodbl(av[3]);
 		}
-		//TL;DR
-		//Prompt correct, kick off the application
-		//1)
 		fractal_init(&fractal);
-		//2)
 		fractal_render(&fractal);
-		//3)
 		mlx_loop(fractal.mlx_connection);
 	}
 	else

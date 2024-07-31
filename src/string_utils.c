@@ -6,45 +6,11 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:25:22 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 15:03:00 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:26:24 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*
-int	ft_strncmp(char *s1, char *s2, int n)
-{
-	if (NULL == s1 || NULL == s2 || n <= 0)
-		return (0);
-	while (*s1 == *s2 && n > 0 && *s1 != '\0')
-	{
-		++s1;
-		++s2;
-		--n;
-	}
-	// chars are basically 1 byte int
-	// 🚨 when 0, strings are equal !! 🚨
-	return (*s1 - *s2);
-}
-*/
-
-
-/*
- * RECURSION
-*/
-/*
-void	putstr_fd(char *s, int fd)
-{
-	if (NULL == s || fd < 0)
-		return ;
-	if (*s != '\0')
-	{
-		write(fd, s, 1);
-		putstr_fd(s + 1, fd);
-	}
-}
-*/
 
 /*
  * ALPHA TO DOUBLE
