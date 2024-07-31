@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:14:07 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 11:14:34 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 12:41:09 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 */
 
 #include "fractol.h"
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 
 /*
  * I HAVE 2 KINDA PROMPTS

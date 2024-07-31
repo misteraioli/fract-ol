@@ -6,13 +6,12 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:17:55 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 11:19:27 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 12:40:49 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "minilibx-linux/mlx.h"
-#include <X11/X.h>
 
 /*
  * ESC or i press the x🔴 in the window
