@@ -41,7 +41,7 @@ $(NAME) : $(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) $(HEADER) $(LIB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(HEADER) -Imlx_linux -O3 -c $< -o $@
+		$(CC) $(CFLAGS) $(HEADER) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
