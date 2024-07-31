@@ -6,12 +6,11 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:20:09 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 11:20:33 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:12:33 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "minilibx-linux/mlx.h"
 
 /*
  * If MALLOC goes bad (improbable)

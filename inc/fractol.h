@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:08:23 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 11:13:37 by niperez          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:12:24 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 # include "../libft/inc/get_next_line.h"
 # include "../libft/inc/ft_printf.h"
 # include <math.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include "minilibx-linux/mlx.h"
+# include "../mlx_linux/mlx.h"
 
 #define WIDTH	800
 #define	HEIGHT	800
