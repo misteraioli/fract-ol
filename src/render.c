@@ -6,15 +6,12 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:22:22 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 16:25:53 by niperez          ###   ########.fr       */
+/*   Updated: 2024/08/01 16:31:06 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*
- * Put a pixel in my image buffer
-*/
 static void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
@@ -23,9 +20,6 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
-/*
- * EASY TOGGLE mandel & julia
-*/
 static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
