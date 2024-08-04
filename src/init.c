@@ -6,85 +6,72 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:20:09 by niperez           #+#    #+#             */
-/*   Updated: 2024/07/31 16:18:56 by niperez          ###   ########.fr       */
+/*   Updated: 2024/08/04 12:07:37 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
-/*
- * If MALLOC goes bad (improbable)
-*/
-static void	malloc_error(void)
+static void	init_data(char **argv, t_fractal *fractal)
 {
-	perror("Problems with malloc");
-	exit(EXIT_FAILURE);
-}
-
-static void	data_init(t_fractal *fractal)
-{
-	fractal->escape_value = 4;
-	fractal->iterations_defintion = 42;
+	fractal->name = argv[1];
+	if (!ft_strcmp(fractal->name, "julia"))
+	{
+		fractal->julia.x = ft_atod(argv[2]);
+		fractal->julia.y = ft_atod(argv[3]);
+	}
+	fractal->esc_value = 4;
+	fractal->nb_iter = 100;
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 }
 
-static void	events_init(t_fractal *fractal)
+static int	init_mlx(t_fractal *fractal)
 {
-	mlx_hook(fractal->mlx_window,
-		KeyPress,
-		KeyPressMask,
-		key_handler,
-		fractal);
-	mlx_hook(fractal->mlx_window,
-		ButtonPress,
-		ButtonPressMask,
-		mouse_handler,
-		fractal);
-	mlx_hook(fractal->mlx_window,
-		DestroyNotify,
-		StructureNotifyMask,
-		close_handler,
-		fractal);
-	mlx_hook(fractal->mlx_window,
-		MotionNotify,
-		PointerMotionMask,
-		julia_track,
-		fractal);
+	fractal->mlx = mlx_init();
+	if (fractal->mlx == NULL)
+		return (1);
+	fractal->mlx_window = mlx_new_window(fractal->mlx,
+			WIDTH, HEIGHT, fractal->name);
+	if (fractal->mlx_window == NULL)
+	{
+		mlx_destroy_display(fractal->mlx);
+		free(fractal->mlx);
+		return (1);
+	}
+	fractal->img.ptr = mlx_new_image(fractal->mlx, WIDTH, HEIGHT);
+	if (fractal->img.ptr == NULL)
+	{
+		mlx_destroy_window(fractal->mlx, fractal->mlx_window);
+		mlx_destroy_display(fractal->mlx);
+		free(fractal->mlx);
+		return (1);
+	}
+	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.ptr,
+			&fractal->img.bpp, &fractal->img.size_line, &fractal->img.endian);
+	return (0);
 }
 
-/*
- * INIT
- * ~mlx
- * ~listening events
- * ~hooks data
-*/
-void	fractal_init(t_fractal *fractal)
+static void	init_events(t_fractal *fractal)
 {
-	fractal->mlx_connection = mlx_init();
-	if (NULL == fractal->mlx_connection)
-		malloc_error();
-	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
-			WIDTH, HEIGHT, fractal->name);
-	if (NULL == fractal->mlx_window)
+	mlx_hook(fractal->mlx_window,
+		KeyPress, KeyPressMask, key_handler, fractal);
+	mlx_hook(fractal->mlx_window,
+		ButtonPress, ButtonPressMask, mouse_handler, fractal);
+	mlx_hook(fractal->mlx_window,
+		DestroyNotify, StructureNotifyMask, close_handler, fractal);
+	mlx_hook(fractal->mlx_window,
+		MotionNotify, PointerMotionMask, julia_track, fractal);
+}
+
+void	init_fractal(char **argv, t_fractal *fractal)
+{
+	init_data(argv, fractal);
+	if (init_mlx(fractal))
 	{
-		mlx_destroy_display(fractal->mlx_connection);
-		free(fractal->mlx_connection);
-		malloc_error();
+		ft_putstr_fd("Error malloc", 2);
+		exit(1);
 	}
-	fractal->img.img_ptr = mlx_new_image(fractal->mlx_connection,
-			WIDTH, HEIGHT);
-	if (NULL == fractal->img.img_ptr)
-	{
-		mlx_destroy_window(fractal->mlx_connection, fractal->mlx_window);
-		mlx_destroy_display(fractal->mlx_connection);
-		free(fractal->mlx_connection);
-		malloc_error();
-	}
-	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.img_ptr,
-			&fractal->img.bpp, &fractal->img.line_len, &fractal->img.endian);
-	events_init(fractal);
-	data_init(fractal);
+	init_events(fractal);
 }

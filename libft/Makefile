@@ -34,6 +34,7 @@ LIBFT		= \
 			strchr \
 			strrchr \
 			strncmp \
+			strcmp \
 			memchr \
 			memcmp \
 			strnstr \

@@ -6,26 +6,18 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:22:22 by niperez           #+#    #+#             */
-/*   Updated: 2024/08/01 16:31:06 by niperez          ###   ########.fr       */
+/*   Updated: 2024/08/04 12:15:39 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	my_pixel_put(int x, int y, t_img *img, int color)
-{
-	int	offset;
-
-	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	*(unsigned int *)(img->pixels_ptr + offset) = color;
-}
-
 static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 {
-	if (!ft_strncmp(fractal->name, "julia", 5))
+	if (!ft_strcmp(fractal->name, "julia"))
 	{
-		c->x = fractal->julia_x;
-		c->y = fractal->julia_y;
+		c->x = fractal->julia.x;
+		c->y = fractal->julia.y;
 	}
 	else
 	{
@@ -34,79 +26,48 @@ static void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 	}
 }
 
-/*
- * 						 ✅ map()
-		   	0__________800     -2___________+2
- *			|			 |     |            |
- *			|			 |	   |            |
- *		800	|			 |     |            |
- *			|			 |     |            |
- *			|			 |     |            |
- *			|____________|     |____________|
- *
- *
- *		MANDELBROT
- *		z = z^2 + c
- *		z initially is (0, 0)
- *		c is the actual point
- *
- *		z = z^2 + c -> z1 = c + c
- *
- *		JULIA
- *		./fractol julia <real> <i>
- *		z = pixel_point + constant
-*/
 static void	handle_pixel(int x, int y, t_fractal *fractal)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
 	int			color;
+	int			pixel_pos;
 
-	i = 0;
-	z.x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-	z.y = (map(y, +2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+	pixel_pos = (y * fractal->img.size_line) + (x * (fractal->img.bpp / 8));
+	z.x = map(x, -2, +2, WIDTH) * fractal->zoom + fractal->shift_x;
+	z.y = map(y, +2, -2, HEIGHT) * fractal->zoom + fractal->shift_y;
 	mandel_vs_julia(&z, &c, fractal);
-	while (i < fractal->iterations_defintion)
+	i = 0;
+	while (i < fractal->nb_iter)
 	{
 		z = sum_complex(square_complex(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
+		if ((z.x * z.x) + (z.y * z.y) > fractal->esc_value)
 		{
-			color = map(i, BLACK, WHITE, 0, fractal->iterations_defintion);
-			my_pixel_put(x, y, &fractal->img, color);
+			color = map(i, BLACK, WHITE, fractal->nb_iter);
+			*(unsigned int *)(fractal->img.pixels_ptr + pixel_pos) = color;
 			return ;
 		}
-		++i;
+		i++;
 	}
-	my_pixel_put(x, y, &fractal->img, WHITE);
+	*(unsigned int *)(fractal->img.pixels_ptr + pixel_pos) = WHITE;
 }
 
-/*
- * Actual 🍖
- *
- *
- *		   	____800_______
- *			|			 |
- *			|			 |
- *		800	|			 |
- *			|			 |
- *			|			 |
- *			|____________|
-*/
 void	fractal_render(t_fractal *fractal)
 {
 	int	x;
 	int	y;
 
-	y = -1;
-	while (++y < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x = 0;
+		while (x < WIDTH)
 		{
 			handle_pixel(x, y, fractal);
+			x++;
 		}
+		y++;
 	}
-	mlx_put_image_to_window(fractal->mlx_connection,
-		fractal->mlx_window, fractal->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_window, fractal->img.ptr, 0, 0);
 }

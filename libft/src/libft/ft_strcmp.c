@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:14:07 by niperez           #+#    #+#             */
-/*   Updated: 2024/08/02 16:45:21 by niperez          ###   ########.fr       */
+/*   Created: 2024/05/16 18:05:27 by niperez           #+#    #+#             */
+/*   Updated: 2024/08/02 11:40:31 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_fractal	fractal;
+	size_t	i;
 
-	if (!(argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10))
-		&& !(argc == 4 && !ft_strncmp(argv[1], "julia", 5)))
-		return (ft_putstr_fd(ERROR_MESSAGE, 2), 1);
-	init_fractal(argv, &fractal);
-	fractal_render(&fractal);
-	mlx_loop(fractal.mlx);
-	close_handler(&fractal);
-	return (0);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0')
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

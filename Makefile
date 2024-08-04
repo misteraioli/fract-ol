@@ -23,8 +23,7 @@ FILES		= \
 			init \
 			events \
 			render \
-			math_utils \
-			string_utils \
+			utils \
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 OBJS	=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
@@ -38,10 +37,10 @@ make_lib :
 		make -C $(LIB_PATH)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) $(HEADER) $(LIB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS) $(HEADER) $(LIB) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(HEADER) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+		$(CC) $(CFLAGS) $(HEADER) -Iminilibx-linux -O3 -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
