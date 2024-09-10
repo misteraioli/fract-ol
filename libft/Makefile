@@ -77,15 +77,15 @@ FILES		= \
 			$(addprefix $(PRINTF_DIR), $(PRINTF)) \
 			$(addprefix $(GNL_DIR), $(GNL)) \
 
-SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
-OBJS	=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
+SRCS		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
+OBJS		=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 
 #######################################################
 ## RULES
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) Makefile
 		$(AR) $(NAME) $(OBJS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)

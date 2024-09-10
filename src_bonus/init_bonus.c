@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 static void	init_data(char **argv, t_fractal *fractal)
 {
@@ -22,6 +22,8 @@ static void	init_data(char **argv, t_fractal *fractal)
 	}
 	fractal->esc_value = 4;
 	fractal->nb_iter = 16;
+	fractal->shift_x = 0.0;
+	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 	fractal->color = WHITE;
 }
