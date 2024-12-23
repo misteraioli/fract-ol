@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:20:09 by niperez           #+#    #+#             */
-/*   Updated: 2024/08/16 17:27:10 by niperez          ###   ########.fr       */
+/*   Updated: 2024/12/23 02:16:31 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	init_data(char **argv, t_fractal *fractal)
 	}
 	fractal->esc_value = 4;
 	fractal->nb_iter = 16;
-	fractal->shift_x = 0.0;
-	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 	fractal->color = WHITE;
+	fractal->shift_x = 0.0;
+	fractal->shift_y = 0.0;
 }
 
 static int	init_mlx(t_fractal *fractal)

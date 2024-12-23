@@ -6,7 +6,7 @@
 /*   By: niperez <niperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:20:09 by niperez           #+#    #+#             */
-/*   Updated: 2024/10/23 16:40:32 by niperez          ###   ########.fr       */
+/*   Updated: 2024/12/23 02:14:48 by niperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ static int	init_mlx(t_fractal *fractal)
 			WIDTH, HEIGHT, fractal->name);
 	if (fractal->mlx_window == NULL)
 	{
+		mlx_destroy_display(fractal->mlx);
 		free(fractal->mlx);
 		return (1);
 	}
 	fractal->img.ptr = mlx_new_image(fractal->mlx, WIDTH, HEIGHT);
 	if (fractal->img.ptr == NULL)
 	{
+		mlx_destroy_window(fractal->mlx, fractal->mlx_window);
 		mlx_destroy_display(fractal->mlx);
 		free(fractal->mlx);
 		return (1);
