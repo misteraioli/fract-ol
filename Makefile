@@ -32,6 +32,12 @@ LIBFT		=	$(LIBFT_PATH)/libft.a
 
 RM	=	rm -rf
 
+# HEADERS
+
+HEADER	= \
+		inc/fractol.h \
+		inc/fractol_bonus.h \
+
 #######################################################
 ## SRCS & OBJS
 
@@ -62,7 +68,7 @@ $(LIBX) :
 $(NAME) : $(OBJS) Makefile
 		$(CC) $(CFLAGS) $(INC) $(OBJS) -o $(NAME) $(LIBX) $(LIBFT)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR):
@@ -73,7 +79,7 @@ bonus : all $(NAME_BONUS)
 $(NAME_BONUS) : $(OBJS_BONUS)
 		$(CC) $(CFLAGS) $(INC) $(OBJS_BONUS) -o $(NAME_BONUS) $(LIBX) $(LIBFT)
 
-$(OBJ_DIR_BONUS)%.o : $(SRC_DIR_BONUS)%.c | $(OBJ_DIR_BONUS)
+$(OBJ_DIR_BONUS)%.o : $(SRC_DIR_BONUS)%.c $(HEADER) | $(OBJ_DIR_BONUS)
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR_BONUS):
@@ -84,7 +90,7 @@ norm :
 
 clean :
 		@make -C $(LIBX_PATH) clean
-		@make -C $(LIBFT_PATH) clean
+		@make -C $(LIBFT_PATH) fclean
 		$(RM) $(OBJ_DIR) $(OBJ_DIR_BONUS)
 
 fclean : clean
