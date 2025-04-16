@@ -1,12 +1,18 @@
 #######################################################
 ## ARGUMENTS
 
-NAME			=	fractol
-NAME_BONUS		=	$(addsuffix _bonus, $(NAME))
+# NAME
 
-CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
-HEADER			=	-Iinc -Iminilibx-linux
+NAME		=	fractol
+NAME_BONUS	=	$(addsuffix _bonus, $(NAME))
+
+# CC FLAG INC
+
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror
+INC		=	-Iinc -Iminilibx-linux
+
+# SRC & OBJ DIR
 
 SRC_DIR			=	src/
 OBJ_DIR			=	obj/
@@ -14,12 +20,17 @@ OBJ_DIR			=	obj/
 SRC_DIR_BONUS	=	src_bonus/
 OBJ_DIR_BONUS	=	obj_bonus/
 
-LIBX_PATH		=	./minilibx-linux
-LIBFT_PATH		=	./libft
-LIBX			=	$(LIBX_PATH)/libmlx_Linux.a -lXext -lX11 -lm -lz
-LIBFT			=	$(LIBFT_PATH)/libft.a
+# LIB
 
-RM				=	rm -rf
+LIBX_PATH	=	./minilibx-linux
+LIBFT_PATH	=	./libft
+
+LIBX		=	$(LIBX_PATH)/libmlx_Linux.a -lXext -lX11 -lm -lz
+LIBFT		=	$(LIBFT_PATH)/libft.a
+
+# RM
+
+RM	=	rm -rf
 
 #######################################################
 ## SRCS & OBJS
@@ -40,7 +51,7 @@ OBJS_BONUS	=	$(addprefix $(OBJ_DIR_BONUS), $(addsuffix _bonus.o, $(FILES)))
 #######################################################
 ## RULES
 
-all : $(NAME)
+all : $(LIBX) $(LIBFT) $(NAME)
 
 $(LIBFT) :
 		make -C $(LIBFT_PATH)
@@ -48,11 +59,11 @@ $(LIBFT) :
 $(LIBX) :
 		make -C $(LIBX_PATH)
 
-$(NAME) : $(LIBX) $(LIBFT) $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) $(HEADER) -o $(NAME) $(LIBX) $(LIBFT)
+$(NAME) : $(OBJS) Makefile
+		$(CC) $(CFLAGS) $(INC) $(OBJS) -o $(NAME) $(LIBX) $(LIBFT)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
@@ -60,10 +71,10 @@ $(OBJ_DIR):
 bonus : all $(NAME_BONUS)
 
 $(NAME_BONUS) : $(OBJS_BONUS)
-		$(CC) $(CFLAGS) $(OBJS_BONUS) $(HEADER) -o $(NAME_BONUS) $(LIBX) $(LIBFT)
+		$(CC) $(CFLAGS) $(INC) $(OBJS_BONUS) -o $(NAME_BONUS) $(LIBX) $(LIBFT)
 
 $(OBJ_DIR_BONUS)%.o : $(SRC_DIR_BONUS)%.c | $(OBJ_DIR_BONUS)
-		$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR_BONUS):
 		@mkdir -p $(OBJ_DIR_BONUS)
@@ -77,9 +88,8 @@ clean :
 		$(RM) $(OBJ_DIR) $(OBJ_DIR_BONUS)
 
 fclean : clean
-		@make -C $(LIBFT_PATH) fclean
 		$(RM) $(NAME) $(NAME_BONUS)
 
 re : fclean all
 
-.PHONY: all clean fclean bonus norm re
+.PHONY: all clean fclean re bonus norm
