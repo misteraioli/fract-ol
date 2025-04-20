@@ -65,25 +65,25 @@ $(LIBFT) :
 $(LIBX) :
 		make -C $(LIBX_PATH)
 
-$(NAME) : $(OBJS) Makefile
+$(NAME) : $(OBJ_DIR) $(OBJS) Makefile
 		$(CC) $(CFLAGS) $(INC) $(OBJS) -o $(NAME) $(LIBX) $(LIBFT)
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR):
 		@mkdir -p $(OBJ_DIR)
 
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER)
+		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
 bonus : all $(NAME_BONUS)
 
-$(NAME_BONUS) : $(OBJS_BONUS)
+$(NAME_BONUS) : $(OBJ_DIR_BONUS) $(OBJS_BONUS)
 		$(CC) $(CFLAGS) $(INC) $(OBJS_BONUS) -o $(NAME_BONUS) $(LIBX) $(LIBFT)
-
-$(OBJ_DIR_BONUS)%.o : $(SRC_DIR_BONUS)%.c $(HEADER) | $(OBJ_DIR_BONUS)
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_DIR_BONUS):
 		@mkdir -p $(OBJ_DIR_BONUS)
+
+$(OBJ_DIR_BONUS)%.o : $(SRC_DIR_BONUS)%.c $(HEADER)
+		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 norm :
 	norminette libft inc src src_bonus
